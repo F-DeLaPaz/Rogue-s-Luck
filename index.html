@@ -1,41 +1,39 @@
-<!--Francisco De La Paz -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rogue's Luck</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Rogue's Luck</title> <!-- Page title -->
+  <link rel="stylesheet" type="text/css" href="main.css"> <!-- Link to CSS file -->
+  <script src="script.js"></script> <!-- Link to JavaScript file -->
 </head>
 <body>
-    <header>
-        <img src="images/roguesluck.png" alt="Rogue's Luck" width="800" height="200"> <!-- this displays Game Banner on top of page -->
-        <hr class="horizontal-line"> <!-- a simple but CSS formated line seperator -->
-      </header>
-    <br><br> <!-- for spacing -->
-          <h1>Fortuna, Tychee, Haminja, Lady Luck... Do Any of them Watch Over You</h1> <!-- simple text for flavor -->
-    <br><br>
-    <div id="diceContainer"> <!-- a container that lets me display my CSS formated Dice x3 Horizontally aligned-->
-        <div class="dice">
-          <img id="diceImage1" src="images/Skull1.png" alt="Dice Image"> <!-- the intial image , and image pool for faces -->
-        </div>
-        <div class="dice">
-          <img id="diceImage2" src="images/Skull1.png" alt="Dice Image">
-        </div>
-        <div class="dice">
-          <img id="diceImage3" src="images/Skull1.png" alt="Dice Image">
-        </div>
-      </div>
-      <br><br>
-      <div id="buttonContainer"> <!-- container to display buttons, the corresponding fuctions and button text -->
-        <button id="rollButton" onclick="rollDie()">Roll Dice</button>
-        <button id="stopButton" onclick="stopRoll()" disabled>Stop</button> <!-- also includes intial state of button -->
-      </div>
-      <br><br> 
-        <div id="buttonContainer">
-      <button id="rerollButton" onclick="multiFunction()">Reroll dice</button>
-    </div>  
+  <header>
+    <img src="images/roguesluck.png" alt="Rogue's Luck" width="800" height="200"> <!-- Display game banner image -->
+    <hr class="horizontal-line"> <!-- Horizontal line separator -->
+  </header>
+  <br><br>
+  <h1>Fortuna, Tychee, Haminja, Lady Luck... Do Any of them Watch Over You</h1> <!-- Display heading text -->
+  <br><br>
+  <div id="diceContainer"> <!-- Dice container -->
+    <div class="dice">
+      <img id="diceImage1" src="images/Skull1.png" alt="Dice Image"> <!-- Display first dice image -->
+    </div>
+    <div class="dice">
+      <img id="diceImage2" src="images/Skull1.png" alt="Dice Image"> <!-- Display second dice image -->
+    </div>
+    <div class="dice">
+      <img id="diceImage3" src="images/Skull1.png" alt="Dice Image"> <!-- Display third dice image -->
+    </div>
+  </div>
+  <br><br>
+  <div id="buttonContainer"> <!-- Button container -->
+    <button id="rollButton" onclick="rollDie()">Roll Dice</button> <!-- Roll dice button -->
+    <button id="stopButton" onclick="stopRoll()" disabled>Stop</button> <!-- Stop button (disabled) -->
+  </div>
+  <br><br>
+  <div id="buttonContainer"> <!-- Button container -->
+    <button id="rerollButton" onclick="multiFunction()">Reroll dice</button> <!-- Reroll dice button -->
+  </div>
 </body>
 </html>

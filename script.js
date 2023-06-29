@@ -1,65 +1,101 @@
-var diceImages = [ // list of images used for die faces and their directory
-    "images/Skull1.png",
-    "images/Fortuna.png",
-    "images/Scar1.png",
-    "images/Scar2.png",
-    "images/Scar3.png",
-    "images/Skull2.png"
-  ];
-  var intervalIds = [];
-  var gameInProgress = false; // variable of game state
-  /* var rerollCounter = 0; */ //  I was planning on looping rerollDice fuction with different alerts, and choice driven outcomes havent figured it out though
+var diceImages = [ // list of images and their location
+  "images/Skull1.png", 
+  "images/Fortuna.png", 
+  "images/Scar1.png", 
+  "images/Scar2.png", 
+  "images/Scar3.png", 
+  "images/Skull2.png" 
+];
+var intervalIds = []; // Array to store interval IDs
+var gameInProgress = false; // Flag to track if game is in progress
 
-  function rollDie() { // this function is clled by the onclick for the inital roll of the dice
-    if (gameInProgress) return;
-  
-    var rollButton = document.getElementById("rollButton"); // variable that looks for roll button input from web page
-    rollButton.disabled = true; 
-  
-    for (var i = 1; i <= 3; i++) { // randomizes die faces
-      var intervalId = setInterval(changeDiceImage.bind(null, i), 100);
-      intervalIds.push(intervalId);
+function rollDie() {
+  if (gameInProgress) return; // If game is already in progress, do nothing
+
+  var rollButton = document.getElementById("rollButton");
+  rollButton.disabled = true; // Disable the roll button
+
+  for (var i = 1; i <= 3; i++) {
+    var intervalId = setInterval(changeDiceImage.bind(null, i), 100); // Start interval for changing dice image
+    intervalIds.push(intervalId); // Store the interval ID
+  }
+
+  var stopButton = document.getElementById("stopButton");
+  stopButton.disabled = false; // Enable the stop button
+
+  gameInProgress = true; // Set game in progress flag
+}
+
+function changeDiceImage(diceNumber) {
+  var diceImage = document.getElementById("diceImage" + diceNumber);
+  var randomIndex = Math.floor(Math.random() * diceImages.length); // Generate random index
+  diceImage.src = diceImages[randomIndex]; // Set dice image using random index
+}
+
+function stopRoll() {
+  intervalIds.forEach(clearInterval); // Clear all intervals
+  intervalIds = []; // Reset interval IDs
+
+  var stopButton = document.getElementById("stopButton");
+  stopButton.disabled = true; // Disable the stop button
+  gameInProgress = false; // Set game in progress flag to false
+}
+
+var counter = 0; // Counter variable
+
+function multiFunction() {
+  counter++; // Increment the counter
+
+  if (counter === 1) {
+    alert("Goddesses favor Rogues"); // Display alert message
+  } else if (counter === 2) {
+    var result = confirm("Do you want to proceed?"); // Display confirmation dialog
+    if (result) {
+      alert("Pushing your luck"); // Display alert message
+    } else {
+      alert("Fotune Favors the Bold. Game Over"); // Display alert message
+      deactivateButtons(); // Deactivate buttons
+      return; // Exit the function
     }
-  
-    var stopButton = document.getElementById("stopButton"); // variable that looks for stopbutton input from web page
-    stopButton.disabled = false;
-  
-    gameInProgress = true;
-  }
-  
-  function changeDiceImage(diceNumber) { // this fuction rotates the image reprresentation of dice faces randomily
-    var diceImage = document.getElementById("diceImage" + diceNumber);
-    var randomIndex = Math.floor(Math.random() * diceImages.length);
-    diceImage.src = diceImages[randomIndex];
-  }
-  
-  function stopRoll() { // this function stop the dice from rolling
-    intervalIds.forEach(clearInterval);
-    intervalIds = [];
-  
-    var stopButton = document.getElementById("stopButton"); //variable that looks for stop button input from web page
-    stopButton.disabled = true;
-    gameInProgress = false;
-  } 
-  
-  function multiFunction() { // this function does 3 things. first is alerts some flavor text, second it calls the rerollDice Function, third
-    // it calls the reactivateStopButton function.
-   alert("Goddesses Favor Rogues");
-   rerollDice();
-   reactivateStopButton();
-  }
-  function rerollDice() { // this fuction starts the dice rerolling
-
-   var rerollButton = document.getElementById("rerollButton"); // variable that looks for reroll dice input from web page
-   
-       for (var i = 1; i <= 3; i++) {
-       var intervalId = setInterval(changeDiceImage.bind(null, i), 100);
-       intervalIds.push(intervalId);
-       }
+  } else if (counter === 3) {
+    var result = confirm("Shall we try Again?"); // Display confirmation dialog
+    if (result) {
+      alert("So be it the fates will Decide..."); // Display alert message
+    } else {
+      alert("The Road not traveled... Game Over"); // Display alert message
+      deactivateButtons(); // Deactivate buttons
+      return; // Exit the function
+    }
+  } else {
+    alert("Game Over"); // Display alert message
+    deactivateButtons(); // Deactivate buttons
+    return; // Exit the function
   }
 
-  function reactivateStopButton() { // this reactivates the stop button in stopRoll fumction
-    var stopButton = document.getElementById("stopButton");
-  stopButton.disabled = false;
-  }
+  rerollDice(); // Reroll the dice
+  reactivateStopButton(); // Reactivate the stop button
+}
 
+function rerollDice() {
+  var rerollButton = document.getElementById("rerollButton");
+
+  for (var i = 1; i <= 3; i++) {
+    var intervalId = setInterval(changeDiceImage.bind(null, i), 100); // Start interval for changing dice image
+    intervalIds.push(intervalId); // Store the interval ID
+  }
+}
+
+function reactivateStopButton() {
+  var stopButton = document.getElementById("stopButton");
+  stopButton.disabled = false; // Enable the stop button
+}
+
+function deactivateButtons() {
+  var rollButton = document.getElementById("rollButton");
+  var stopButton = document.getElementById("stopButton");
+  var rerollButton = document.getElementById("rerollButton");
+
+  rollButton.disabled = true; // Disable the roll button
+  stopButton.disabled = true; // Disable the stop button
+  rerollButton.disabled = true; // Disable the reroll button
+}
